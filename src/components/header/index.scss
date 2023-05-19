@@ -1,0 +1,27 @@
+.header-box {
+    max-width: 2160px;
+    min-width: 1280px;
+    margin: auto;
+    padding: 20px 40px;
+    height: 70px;
+    background: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 46px;
+    overflow-x: auto;
+    .logo-box {
+        font-size: 21px;
+        color: #00ff00;
+        display: flex;
+        align-items: center;
+    }
+    .header-item-box {
+        display: flex;
+        cursor: pointer;
+        .header-item {
+            color: #fff;
+            margin: 0 30px;
+        }
+    }
+}

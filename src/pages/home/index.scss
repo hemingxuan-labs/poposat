@@ -1,0 +1,29 @@
+.home-box {
+    max-width: 2160px;
+    min-width: 1280px;
+    margin: auto;
+    padding: 20px 40px;
+    overflow-x: auto;
+    background-color: #000;
+    height: calc(100vh - 80px);
+    .market-box {
+        flex: 1;
+        opacity: 1;
+        border: 3px solid #00ff00;
+    }
+    .market-finder-box {
+        width: 85px;
+        .market-text-box {
+            width: 60px;
+            text-align: center;
+            position: absolute;
+            border: 3px solid #000000;
+            left: 50%;
+            top: 50%;
+            font-size: 10px;
+            padding: 0 3px;
+            font-weight: bold;
+            transform: translate(-50%, -40%) rotate(-8deg);
+        }
+    }
+}
