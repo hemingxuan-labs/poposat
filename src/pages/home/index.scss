@@ -3,9 +3,8 @@
     min-width: 1280px;
     margin: auto;
     padding: 20px 40px;
-    overflow-x: auto;
     background-color: #000;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 105px);
     .market-box {
         flex: 1;
         opacity: 1;
@@ -14,7 +13,7 @@
     .market-finder-box {
         width: 85px;
         .market-text-box {
-            width: 60px;
+            width: 68px;
             text-align: center;
             position: absolute;
             border: 3px solid #000000;

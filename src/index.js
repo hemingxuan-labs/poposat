@@ -7,6 +7,7 @@ import App from '@/App'
 import { persistor, store } from '@/store/index.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+
 import '@/assets/sass/custom.scss'
 import '@/assets/font/iconfont.css'
 
