@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import home1 from '@/assets/image/home1.png'
 import home2 from '@/assets/image/home2.png'
 import home3 from '@/assets/image/home3.png'
+import ordi from '@/assets/image/ordi.png'
 import DigitalRain from '@/components/digital-rain'
 import TradingView from '@/components/trading-view'
 import { MyButton } from '@/components/mui-components/index.js'
@@ -34,6 +35,7 @@ function Home() {
     const handleChange = (event) => {
         setAge(event.target.value)
     }
+    const [market, SetMarket] = React.useState(true)
     return (
         <div>
             <div className="home-box d-flex flex-column gap-4">
@@ -43,7 +45,11 @@ function Home() {
                         combined with Erc20 smart contracts, to ensure that every transaction has
                         proof. Not only Brc20, but also Orc20 and Drc20
                     </code>
-                    <div className="market-box p-1 overflow-hidden">
+
+                    <div
+                        className={`market-box p-1 overflow-hidden ${
+                            market ? 'opacity-100' : 'opacity-0'
+                        }`}>
                         <div
                             className="text-center fs-6 d-flex-center"
                             style={{ height: 22, background: '#05FB00' }}>
@@ -117,15 +123,21 @@ function Home() {
                         </div>
                     </div>
                     <div
+                        className="overflow-hidden"
                         style={{
                             width: 400,
                             border: '3px solid #00ff00',
-                            borderRadius: 16
+                            borderRadius: 16,
+                            color: '#00ff00'
                         }}>
                         <div className="p-3">
-                            <span className="fs-5" style={{ color: '#00ff00' }}>
-                                Swap
-                            </span>
+                            <div className="d-flex-between-center">
+                                <span className="fs-5">Swap</span>
+                                <div>
+                                    <i className="iconfont icon-shandian me-3"></i>
+                                    <i className="iconfont icon-shezhi-xitongshezhi"></i>
+                                </div>
+                            </div>
                             <MyFormControl className="mt-3" fullWidth>
                                 <InputLabel id="demo-simple-select-label">
                                     Hybrid Router(V2+V3)
@@ -134,33 +146,67 @@ function Home() {
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={age}
-                                    label="Age"
+                                    label="Hybrid Router(V2+V3)"
                                     onChange={handleChange}>
-                                    <MenuItem value={10}>Hybrid Router(V2+V4)</MenuItem>
+                                    <MenuItem value={10}> Hybrid Router(V2+V3)</MenuItem>
                                     <MenuItem value={20}>Hybrid Router(V2+V5)</MenuItem>
                                     <MenuItem value={30}>Hybrid Router(V2+V6)</MenuItem>
                                 </Select>
                             </MyFormControl>
                             <div
-                                className="mt-3"
+                                className="mt-3 p-2 px-3 fs-5"
                                 style={{
-                                    height: 80,
+                                    height: 84,
                                     borderRadius: 5,
                                     border: '1px solid #00FF00'
-                                }}></div>
+                                }}>
+                                <div className="d-flex-align-center">
+                                    <i className="iconfont icon-currencybtc fs-5"></i>
+                                    <span className="mx-2">BTC</span>
+                                    <i className="iconfont icon-arrow-down-bold"></i>
+                                </div>
+                                <div className="d-flex-between-center fs-6 mt-2">
+                                    <span>2.0</span>
+                                    <div className="d-flex-align-center">
+                                        <i className="iconfont icon-qianbao"></i>
+                                        <span className="fs-5 mx-1">0</span>
+                                        <span className="fs-8">btc</span>
+                                    </div>
+                                </div>
+                            </div>
                             <div
-                                className="mt-3"
+                                className="mt-3 p-2 px-3 fs-5"
                                 style={{
-                                    height: 80,
+                                    height: 84,
                                     borderRadius: 5,
                                     border: '1px solid #00FF00'
-                                }}></div>
+                                }}>
+                                <div className="d-flex-align-center">
+                                    <img
+                                        src={ordi}
+                                        style={{
+                                            width: 20
+                                        }}
+                                        alt=""
+                                    />
+                                    <span className="mx-2">ORDI</span>
+                                    <i className="iconfont icon-arrow-down-bold"></i>
+                                </div>
+                                <div className="d-flex-between-center fs-6 mt-2">
+                                    <span>2.0</span>
+                                    <div className="d-flex-align-center">
+                                        <i className="iconfont icon-qianbao"></i>
+                                        <span className="fs-5 mx-1">0</span>
+                                        <span className="fs-8">ordi</span>
+                                    </div>
+                                </div>
+                            </div>
                             <MyButton className="text-nowrap mt-3" style={{ width: '100%' }}>
                                 Enter Amount
                             </MyButton>
                         </div>
                     </div>
-                    <div className="d-flex flex-column" style={{ flex: 1 }}>
+                    <div className="d-flex flex-column" style={{ flex: 1, color: '#00ff00' }}>
                         <div className="position-relative" style={{ height: 70, top: -10 }}>
                             <img
                                 className="d-block position-absolute top-50 end-0 translate-middle-y"
@@ -183,6 +229,7 @@ function Home() {
                                     border: '3px solid #00ff00',
                                     borderRadius: 16
                                 }}>
+                                <div className="fs-5 py-1 px-3">Trade</div>
                                 <TradingView></TradingView>
                             </div>
                         </div>

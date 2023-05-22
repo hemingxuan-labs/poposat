@@ -57,36 +57,55 @@ export default function PrimarySearchAppBar() {
                     />
                     <p>POPOSAT</p>
                 </div>
-                <div className="header-button">
+                <div className="header-button ">
+                    <div className="d-flex-center me-5">
+                        <a href="/" target="_blank" rel="noreferrer">
+                            <i className="iconfont icon-twitter-fill text-white fs-3 mx-3"></i>
+                        </a>
+                        <a href="/" target="_blank" rel="noreferrer">
+                            <i className="iconfont icon-discord text-white fs-3 mx-3"></i>
+                        </a>
+                        <a href="/" target="_blank" rel="noreferrer">
+                            <i className="iconfont icon-medium text-white fs-3 mx-3"></i>
+                        </a>
+                    </div>
                     {!walletAddress ? (
-                        <MyButton
-                            className="text-nowrap px-3"
-                            onClick={() => {
-                                web3WalletNow.getWalletAddress()
-                            }}>
-                            Connect Wallet
-                        </MyButton>
+                        <div className="position-relative">
+                            <MyButton className="text-nowrap px-3" onClick={handleClick}>
+                                Connect Wallet
+                            </MyButton>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleCloseMenu}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button'
+                                }}
+                                sx={{
+                                    '.MuiMenu-paper': {
+                                        width: 180
+                                    }
+                                }}>
+                                <MenuItem
+                                    onClick={() => {
+                                        handleCloseMenu()
+                                    }}>
+                                    Unsat
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => {
+                                        handleCloseMenu()
+                                    }}>
+                                    Unsat2
+                                </MenuItem>
+                            </Menu>
+                        </div>
                     ) : (
                         <div className="text-white cursor-pointer" onClick={handleClick}>
                             {showWalletAddress}
                         </div>
                     )}
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleCloseMenu}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button'
-                        }}>
-                        <MenuItem
-                            onClick={() => {
-                                web3WalletNow.setWalletLoginLogout()
-                                handleCloseMenu()
-                            }}>
-                            Disconnect
-                        </MenuItem>
-                    </Menu>
                 </div>
             </header>
         </div>
