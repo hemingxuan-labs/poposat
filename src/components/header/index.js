@@ -7,6 +7,7 @@ import { MyButton } from '@/components/mui-components/index.js'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import './index.scss'
+import web3Wallet from '@/utils/web3-wallet.js'
 
 export default function PrimarySearchAppBar() {
     const navigate = useNavigate()
@@ -37,6 +38,7 @@ export default function PrimarySearchAppBar() {
 
     const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
+    const web3WalletNow = new web3Wallet();
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
@@ -62,7 +64,12 @@ export default function PrimarySearchAppBar() {
                         <MyButton
                             className="text-nowrap px-3"
                             onClick={() => {
-                                web3WalletNow.getWalletAddress()
+                                // web3WalletNow.getSatWallet()
+                                // web3WalletNow.changeSatNetwork()
+                                // web3WalletNow.getSatBalance()
+
+                                web3WalletNow.getWalletAddress(1);
+                                web3WalletNow.getSatInscriptions();
                             }}>
                             Connect Wallet
                         </MyButton>
