@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import logo from '@/assets/image/logo.png'
+import unisat from '@/assets/image/unisat.png'
+import okx from '@/assets/image/okx.png'
 import { MyButton } from '@/components/mui-components/index.js'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -91,13 +93,15 @@ export default function PrimarySearchAppBar() {
                                     onClick={() => {
                                         handleCloseMenu()
                                     }}>
-                                    Unsat
+                                    <img src={unisat} style={{ width: 26 }} alt="" />
+                                    <span className="ms-3 text-00ff00">Unisat</span>
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => {
                                         handleCloseMenu()
                                     }}>
-                                    Unsat2
+                                    <img src={okx} style={{ width: 26 }} alt="" />
+                                    <span className="ms-3 text-00ff00">OKX Wallet</span>
                                 </MenuItem>
                             </Menu>
                         </div>

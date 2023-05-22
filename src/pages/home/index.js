@@ -206,7 +206,7 @@ function Home() {
                             </MyButton>
                         </div>
                     </div>
-                    <div className="d-flex flex-column" style={{ flex: 1, color: '#00ff00' }}>
+                    <div className="d-flex flex-column text-00ff00" style={{ flex: 1 }}>
                         <div className="position-relative" style={{ height: 70, top: -10 }}>
                             <img
                                 className="d-block position-absolute top-50 end-0 translate-middle-y"
