@@ -3,7 +3,6 @@
     min-width: 1280px;
     margin: auto;
     padding: 20px 40px;
-    background-color: #000;
     height: calc(100vh - 110px);
     .market-box {
         flex: 1;
@@ -12,6 +11,10 @@
     }
     .market-finder-box {
         width: 85px;
+        transition: 0.3s;
+        &:hover {
+            box-shadow: rgba(138, 249, 134, 0.6) 0px 7px 29px 0px;
+        }
         .market-text-box {
             width: 68px;
             text-align: center;

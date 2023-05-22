@@ -4,8 +4,11 @@ import home1 from '@/assets/image/home1.png'
 import home2 from '@/assets/image/home2.png'
 import home3 from '@/assets/image/home3.png'
 import ordi from '@/assets/image/ordi.png'
+import homebg from '@/assets/image/homebg.png'
 import DigitalRain from '@/components/digital-rain'
 import TradingView from '@/components/trading-view'
+import Typewriter from '@/components/typewriter'
+import message from '@/components/message'
 import { MyButton } from '@/components/mui-components/index.js'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -30,26 +33,48 @@ export const MyFormControl = styled(FormControl)`
     }
 `
 function Home() {
+    const muneList = [
+        {
+            title: 'Market',
+            path: '/'
+        },
+        {
+            title: 'Trade',
+            path: '/'
+        },
+        {
+            title: 'Swap',
+            path: '/'
+        },
+        {
+            title: 'Order',
+            path: '/'
+        }
+    ]
     const [age, setAge] = React.useState('')
-
     const handleChange = (event) => {
         setAge(event.target.value)
     }
     const [market, SetMarket] = React.useState(true)
     return (
         <div>
-            <div className="home-box d-flex flex-column gap-4">
+            <img
+                src={homebg}
+                className="position-absolute top-50 start-50 translate-middle z-0"
+                alt=""
+            />
+            <div className="home-box d-flex flex-column gap-4 position-relative">
                 <div className="d-flex gap-4" style={{ height: '40%' }}>
                     <code className="d-block" style={{ color: '#05FB00', width: 350 }}>
-                        POPOSAT redefines the decentralized trading market for Brc20 tokens,
-                        combined with Erc20 smart contracts, to ensure that every transaction has
-                        proof. Not only Brc20, but also Orc20 and Drc20
+                        <Typewriter></Typewriter>
                     </code>
-
                     <div
                         className={`market-box p-1 overflow-hidden ${
                             market ? 'opacity-100' : 'opacity-0'
-                        }`}>
+                        }`}
+                        onClick={() => {
+                            message.error({ content: 'Coming Soon', duration: 5000 })
+                        }}>
                         <div
                             className="text-center fs-6 d-flex-center"
                             style={{ height: 22, background: '#05FB00' }}>
@@ -105,22 +130,16 @@ function Home() {
                     <div
                         className="position-relative d-flex justify-content-end flex-column gap-4 pb-4"
                         style={{ width: 150 }}>
-                        <div className="market-finder-box position-relative">
-                            <img className="d-block" src={home1} style={{ width: 85 }} alt="" />
-                            <div className="market-text-box">Market</div>
-                        </div>
-                        <div className="market-finder-box position-relative">
-                            <img className="d-block" src={home1} style={{ width: 85 }} alt="" />
-                            <div className="market-text-box">Trade</div>
-                        </div>
-                        <div className="market-finder-box position-relative">
-                            <img className="d-block" src={home1} style={{ width: 85 }} alt="" />
-                            <div className="market-text-box">Swap</div>
-                        </div>
-                        <div className="market-finder-box position-relative">
-                            <img className="d-block" src={home1} style={{ width: 85 }} alt="" />
-                            <div className="market-text-box">Order</div>
-                        </div>
+                        {muneList.map((item) => (
+                            <div
+                                className="market-finder-box position-relative cursor-pointer"
+                                onClick={() => {
+                                    message.error({ content: 'Coming Soon', duration: 5000 })
+                                }}>
+                                <img className="d-block" src={home1} style={{ width: 85 }} alt="" />
+                                <div className="market-text-box">{item.title}</div>
+                            </div>
+                        ))}
                     </div>
                     <div
                         className="overflow-hidden"
@@ -201,7 +220,12 @@ function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <MyButton className="text-nowrap mt-3" style={{ width: '100%' }}>
+                            <MyButton
+                                className="text-nowrap mt-3"
+                                style={{ width: '100%' }}
+                                onClick={() => {
+                                    message.error({ content: 'Coming Soon', duration: 5000 })
+                                }}>
                                 Enter Amount
                             </MyButton>
                         </div>
@@ -224,13 +248,18 @@ function Home() {
                         <div className="d-flex" style={{ height: 'calc(100% - 70px)' }}>
                             <div
                                 className="overflow-hidden"
+                                onClick={() => {
+                                    message.error({ content: 'Coming Soon', duration: 5000 })
+                                }}
                                 style={{
                                     flex: 1,
                                     border: '3px solid #00ff00',
                                     borderRadius: 16
                                 }}>
                                 <div className="fs-5 py-1 px-3">Trade</div>
-                                <TradingView></TradingView>
+                                <div style={{ height: 'calc(100% - 38px)' }}>
+                                    <TradingView></TradingView>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -25,11 +25,13 @@ const message = {
         this.dom = document.createElement('div')
         // 定义组件，
         const JSXdom = (
-            <Message
-                content={content}
-                duration={duration}
-                type={types}
-                iconShow={iconShow}></Message>
+            <>
+                <Message
+                    content={content}
+                    duration={duration}
+                    type={types}
+                    iconShow={iconShow}></Message>
+            </>
         )
         // 渲染DOM
         createRoot(this.dom).render(JSXdom)

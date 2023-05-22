@@ -7,10 +7,10 @@ module.exports = {
     },
     devServer: {
         proxy: {
-            '/popos': {
-                target: 'http://192.168.0.15:10888/',
+            '/api': {
+                target: 'http://192.168.0.15:10888',
                 changeOrigin: true,
-                pathRewrite: { '/popos': 'popos' }
+                pathRewrite: { '/api': 'api' }
             }
         }
     }
