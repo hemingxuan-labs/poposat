@@ -1,7 +1,4 @@
 import { store } from '@/store/index.js'
-import { setWalletAddress, setWalletToken, setWalletLoginLogout } from '@/store/persist.js'
-import { ethers } from 'ethers'
-import message from '@/components/message'
 export default class web3Wallet {
     constructor() {
         // 单例模式
@@ -20,6 +17,7 @@ export default class web3Wallet {
             return false
         }
     }
+
     async accountsChanged() {
         // 监听切链操作 & 切换钱包
         if (window.ethereum) {
@@ -37,10 +35,11 @@ export default class web3Wallet {
             })
         }
     }
-    async getWalletAddress() {
+
+    async getWalletAddress(walletId = 0) {
         // 返回钱包地址 建立连接
         try {
-            const accounts = await this.provider.send('eth_requestAccounts', [])
+            const accounts = walletId === 0 ? await this.getOKXWallet(): await this.getSatWallet();
             this.modifyWalletAddress(accounts[0])
             return accounts[0]
         } catch (error) {
@@ -48,6 +47,7 @@ export default class web3Wallet {
             return false
         }
     }
+
     async requestSignature() {
         // 请求钱包签名
         let walletAddress = await this.getWalletAddress()
@@ -65,6 +65,7 @@ export default class web3Wallet {
             return false
         }
     }
+
     async switchChain() {
         // 切换网络
         // this.switchOrAddChain({
@@ -86,6 +87,7 @@ export default class web3Wallet {
             rpcUrls: ['https://rpc.ankr.com/eth_goerli']
         })
     }
+
     async switchOrAddChain(chainObject) {
         try {
             await window.ethereum.request({
@@ -123,8 +125,94 @@ export default class web3Wallet {
             }
         }
     }
+
+    async getSatWallet() {
+        if (typeof window.unisat == 'undefined') {
+            console.log('UniSat Wallet is not installed!');
+        } else {
+            try {
+                // get Account
+                let accounts = await window.unisat.requestAccounts();
+                console.log('connect unisat success', accounts);
+                return accounts;
+            } catch (e) {
+                console.log('connect unisat failed');
+            }
+        }
+    }
+
+    async changeSatNetwork(prod=0){
+        try {
+            let res
+            if(prod){
+                res = await window.unisat.switchNetwork("livenet");
+            }else{
+                res = await window.unisat.switchNetwork("testnet");
+            }
+            console.log(res)
+          } catch (e) {
+            console.log(e);
+          }
+    }
+
+    async getSatBalance(){
+        let res = await window.unisat.getBalance();
+        console.log(res)
+    }
+
+    async sendBitcoin(toAddress, satoshis, options) {
+        try {
+            if(toAddress != null && satoshis > 0){
+                let txid = await window.unisat.sendBitcoin(toAddress,satoshis,options);
+                console.log(txid)
+            }else{
+                console.log("Invalid params")
+            }
+          } catch (e) {
+            console.log(e);
+          }
+    }
+
+    async getSatInscriptions(){
+        try {
+            let res = await window.unisat.getInscriptions();
+            console.log(res)
+          } catch (e) {
+            console.log(e);
+          }
+    }
+
+    async sendInscription(address, inscriptionId, options) {
+        try {
+            if(toAddress != null && inscriptionId != null) {
+                let {txid} = await window.unisat.sendInscription(address, inscriptionId, options);
+                console.log(txid)
+            }else{
+                console.log("Invalid params")
+            }
+          } catch (e) {
+            console.log(e);
+          }
+    }
+
+    async getOKXWallet(){
+        if (typeof window.okxwallet == 'undefined') {
+            console.log('Okx Wallet is not installed!');
+        }else{
+            try{
+                let accounts = await window.okxwallet.request({ method: 'eth_requestAccounts' });
+                console.log('connect okx success', accounts);
+                return accounts;
+            }catch(error){
+                console.log('connect okx failed');
+            }
+        }
+    }
+
+    async 
+
     modifyWalletAddress(address) {
-        store.dispatch(setWalletAddress(address))
+        // store.dispatch(setWalletAddress(address))
     }
     setWalletToken(signature) {
         store.dispatch(setWalletToken(signature))

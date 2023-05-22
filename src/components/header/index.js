@@ -9,6 +9,7 @@ import { MyButton } from '@/components/mui-components/index.js'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import './index.scss'
+import web3Wallet from '@/utils/web3-wallet.js'
 
 export default function PrimarySearchAppBar() {
     const navigate = useNavigate()
@@ -39,10 +40,13 @@ export default function PrimarySearchAppBar() {
 
     const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
+    const web3WalletNow = new web3Wallet();
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
-    const handleCloseMenu = () => {
+    const handleCloseMenu = async (item=0) => {
+        let accounts = await web3WalletNow.getWalletAddress(item)
+        console.log("handleCloseMenu : " + accounts)
         setAnchorEl(null)
     }
     return (
@@ -91,7 +95,7 @@ export default function PrimarySearchAppBar() {
                                 }}>
                                 <MenuItem
                                     onClick={() => {
-                                        handleCloseMenu()
+                                        handleCloseMenu(1)
                                     }}>
                                     <img src={unisat} style={{ width: 26 }} alt="" />
                                     <span className="ms-3 text-00ff00">Unisat</span>
