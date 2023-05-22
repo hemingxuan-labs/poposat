@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import logo from '@/assets/image/logo.png'
+import unisat from '@/assets/image/unisat.png'
+import okx from '@/assets/image/okx.png'
 import { MyButton } from '@/components/mui-components/index.js'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -42,7 +44,9 @@ export default function PrimarySearchAppBar() {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
-    const handleCloseMenu = () => {
+    const handleCloseMenu = async (item=0) => {
+        let accounts = await web3WalletNow.getWalletAddress(item)
+        console.log("handleCloseMenu : " + accounts)
         setAnchorEl(null)
     }
     return (
@@ -59,41 +63,57 @@ export default function PrimarySearchAppBar() {
                     />
                     <p>POPOSAT</p>
                 </div>
-                <div className="header-button">
+                <div className="header-button ">
+                    <div className="d-flex-center me-5">
+                        <a href="/" target="_blank" rel="noreferrer">
+                            <i className="iconfont icon-twitter-fill text-white fs-3 mx-3"></i>
+                        </a>
+                        <a href="/" target="_blank" rel="noreferrer">
+                            <i className="iconfont icon-discord text-white fs-3 mx-3"></i>
+                        </a>
+                        <a href="/" target="_blank" rel="noreferrer">
+                            <i className="iconfont icon-medium text-white fs-3 mx-3"></i>
+                        </a>
+                    </div>
                     {!walletAddress ? (
-                        <MyButton
-                            className="text-nowrap px-3"
-                            onClick={() => {
-                                // web3WalletNow.getSatWallet()
-                                // web3WalletNow.changeSatNetwork()
-                                // web3WalletNow.getSatBalance()
-
-                                web3WalletNow.getWalletAddress(1);
-                                web3WalletNow.getSatInscriptions();
-                            }}>
-                            Connect Wallet
-                        </MyButton>
+                        <div className="position-relative">
+                            <MyButton className="text-nowrap px-3" onClick={handleClick}>
+                                Connect Wallet
+                            </MyButton>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleCloseMenu}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button'
+                                }}
+                                sx={{
+                                    '.MuiMenu-paper': {
+                                        width: 180
+                                    }
+                                }}>
+                                <MenuItem
+                                    onClick={() => {
+                                        handleCloseMenu(1)
+                                    }}>
+                                    <img src={unisat} style={{ width: 26 }} alt="" />
+                                    <span className="ms-3 text-00ff00">Unisat</span>
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => {
+                                        handleCloseMenu()
+                                    }}>
+                                    <img src={okx} style={{ width: 26 }} alt="" />
+                                    <span className="ms-3 text-00ff00">OKX Wallet</span>
+                                </MenuItem>
+                            </Menu>
+                        </div>
                     ) : (
                         <div className="text-white cursor-pointer" onClick={handleClick}>
                             {showWalletAddress}
                         </div>
                     )}
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleCloseMenu}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button'
-                        }}>
-                        <MenuItem
-                            onClick={() => {
-                                web3WalletNow.setWalletLoginLogout()
-                                handleCloseMenu()
-                            }}>
-                            Disconnect
-                        </MenuItem>
-                    </Menu>
                 </div>
             </header>
         </div>

@@ -39,7 +39,7 @@ export default class web3Wallet {
     async getWalletAddress(walletId = 0) {
         // 返回钱包地址 建立连接
         try {
-            const accounts = walletId === 0 ? this.getOKXWallet():this.getSatWallet();
+            const accounts = walletId === 0 ? await this.getOKXWallet(): await this.getSatWallet();
             this.modifyWalletAddress(accounts[0])
             return accounts[0]
         } catch (error) {

@@ -10,7 +10,7 @@ const AppBox = styled.div`
     min-height: 100vh;
 `
 const OutletBox = styled.div`
-    min-height: calc(100vh - 105px);
+    min-height: calc(100vh - 110px);
 `
 const darkTheme = createTheme({
     palette: {
