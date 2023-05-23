@@ -37,17 +37,28 @@ export default function PrimarySearchAppBar() {
     ]
     const walletAddress = useSelector((state) => state.persist.walletAddress)
     const showWalletAddress = useSelector((state) => state.persist.showWalletAddress)
+    const web3WalletNow = new web3Wallet()
 
     const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
-    const web3WalletNow = new web3Wallet();
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
-    const handleCloseMenu = async (item=0) => {
-        let accounts = await web3WalletNow.getWalletAddress(item)
-        console.log("handleCloseMenu : " + accounts)
+    const handleClose = () => {
         setAnchorEl(null)
+    }
+    const onGetWalletAddress = async (item = 0) => {
+        let accounts = await web3WalletNow.getWalletAddress(item)
+        console.log('handleCloseMenu : ' + accounts)
+    }
+
+    const [anchorElDis, setAnchorElDis] = React.useState(null)
+    const openDis = Boolean(anchorElDis)
+    const handleClickDis = (event) => {
+        setAnchorElDis(event.currentTarget)
+    }
+    const handleCloseMenuDis = () => {
+        setAnchorElDis(null)
     }
     return (
         <div>
@@ -84,7 +95,7 @@ export default function PrimarySearchAppBar() {
                                 id="basic-menu"
                                 anchorEl={anchorEl}
                                 open={open}
-                                onClose={handleCloseMenu}
+                                onClose={handleClose}
                                 MenuListProps={{
                                     'aria-labelledby': 'basic-button'
                                 }}
@@ -95,14 +106,16 @@ export default function PrimarySearchAppBar() {
                                 }}>
                                 <MenuItem
                                     onClick={() => {
-                                        handleCloseMenu(1)
+                                        onGetWalletAddress(1)
+                                        handleClose()
                                     }}>
                                     <img src={unisat} style={{ width: 26 }} alt="" />
                                     <span className="ms-3 text-00ff00">Unisat</span>
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => {
-                                        handleCloseMenu()
+                                        onGetWalletAddress(0)
+                                        handleClose()
                                     }}>
                                     <img src={okx} style={{ width: 26 }} alt="" />
                                     <span className="ms-3 text-00ff00">OKX Wallet</span>
@@ -110,8 +123,28 @@ export default function PrimarySearchAppBar() {
                             </Menu>
                         </div>
                     ) : (
-                        <div className="text-white cursor-pointer" onClick={handleClick}>
-                            {showWalletAddress}
+                        <div className="text-white cursor-pointer">
+                            <div onClick={handleClickDis}> {showWalletAddress}</div>
+                            <Menu
+                                anchorEl={anchorElDis}
+                                open={openDis}
+                                onClose={handleCloseMenuDis}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button'
+                                }}
+                                sx={{
+                                    '.MuiMenu-paper': {
+                                        width: 180
+                                    }
+                                }}>
+                                <MenuItem
+                                    onClick={() => {
+                                        web3WalletNow.setWalletLoginLogout()
+                                        handleCloseMenuDis()
+                                    }}>
+                                    Disconnect
+                                </MenuItem>
+                            </Menu>
                         </div>
                     )}
                 </div>

@@ -2,13 +2,14 @@ import axios from 'axios'
 // import store from '@/store/index'
 let service = axios.create({
     baseURL: '',
-    timeout: 20000,
+    timeout: 20000
 })
 // 请求拦截器
 service.interceptors.request.use(
     (config) => {
         // config.headers['AuthAuthorize'] = store.state.persistence.userToken || ''
-        // config.url = import.meta.env.VITE_REQUEST_URL + config.url
+        config.url =
+            process.env.NODE_ENV === 'development' ? '' : 'http://35.79.219.105:10888' + config.url
         return config
     },
     (error) => {

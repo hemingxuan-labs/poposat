@@ -1,4 +1,7 @@
 import { store } from '@/store/index.js'
+import message from '@/components/message'
+import { setWalletAddress, setWalletLoginLogoutState } from '@/store/persist.js'
+import { userDoLong } from '@/api/index.js'
 export default class web3Wallet {
     constructor() {
         // 单例模式
@@ -39,11 +42,10 @@ export default class web3Wallet {
     async getWalletAddress(walletId = 0) {
         // 返回钱包地址 建立连接
         try {
-            const accounts = walletId === 0 ? await this.getOKXWallet(): await this.getSatWallet();
+            const accounts = walletId === 0 ? await this.getOKXWallet() : await this.getSatWallet()
             this.modifyWalletAddress(accounts[0])
             return accounts[0]
         } catch (error) {
-            this.messageError(error.message)
             return false
         }
     }
@@ -128,102 +130,97 @@ export default class web3Wallet {
 
     async getSatWallet() {
         if (typeof window.unisat == 'undefined') {
-            console.log('UniSat Wallet is not installed!');
+            this.messageError('UniSat Wallet is not installed!')
         } else {
             try {
-                // get Account
-                let accounts = await window.unisat.requestAccounts();
-                console.log('connect unisat success', accounts);
-                return accounts;
+                let accounts = await window.unisat.requestAccounts()
+                return accounts
             } catch (e) {
-                console.log('connect unisat failed');
+                this.messageError(error.message)
             }
         }
     }
 
-    async changeSatNetwork(prod=0){
+    async changeSatNetwork(prod = 0) {
         try {
             let res
-            if(prod){
-                res = await window.unisat.switchNetwork("livenet");
-            }else{
-                res = await window.unisat.switchNetwork("testnet");
+            if (prod) {
+                res = await window.unisat.switchNetwork('livenet')
+            } else {
+                res = await window.unisat.switchNetwork('testnet')
             }
             console.log(res)
-          } catch (e) {
-            console.log(e);
-          }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    async getSatBalance(){
-        let res = await window.unisat.getBalance();
+    async getSatBalance() {
+        let res = await window.unisat.getBalance()
         console.log(res)
     }
 
     async sendBitcoin(toAddress, satoshis, options) {
         try {
-            if(toAddress != null && satoshis > 0){
-                let txid = await window.unisat.sendBitcoin(toAddress,satoshis,options);
+            if (toAddress != null && satoshis > 0) {
+                let txid = await window.unisat.sendBitcoin(toAddress, satoshis, options)
                 console.log(txid)
-            }else{
-                console.log("Invalid params")
+            } else {
+                console.log('Invalid params')
             }
-          } catch (e) {
-            console.log(e);
-          }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    async getSatInscriptions(){
+    async getSatInscriptions() {
         try {
-            let res = await window.unisat.getInscriptions();
+            let res = await window.unisat.getInscriptions()
             console.log(res)
-          } catch (e) {
-            console.log(e);
-          }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     async sendInscription(address, inscriptionId, options) {
         try {
-            if(toAddress != null && inscriptionId != null) {
-                let {txid} = await window.unisat.sendInscription(address, inscriptionId, options);
+            if (toAddress != null && inscriptionId != null) {
+                let { txid } = await window.unisat.sendInscription(address, inscriptionId, options)
                 console.log(txid)
-            }else{
-                console.log("Invalid params")
+            } else {
+                console.log('Invalid params')
             }
-          } catch (e) {
-            console.log(e);
-          }
-    }
-
-    async getOKXWallet(){
-        if (typeof window.okxwallet == 'undefined') {
-            console.log('Okx Wallet is not installed!');
-        }else{
-            try{
-                let accounts = await window.okxwallet.request({ method: 'eth_requestAccounts' });
-                console.log('connect okx success', accounts);
-                return accounts;
-            }catch(error){
-                console.log('connect okx failed');
-            }
+        } catch (e) {
+            console.log(e)
         }
     }
 
-    async 
-
-    modifyWalletAddress(address) {
-        // store.dispatch(setWalletAddress(address))
+    async getOKXWallet() {
+        if (typeof window.okxwallet == 'undefined') {
+            this.messageError('OKX Wallet Not Installed')
+        } else {
+            try {
+                let accounts = await window.okxwallet.request({ method: 'eth_requestAccounts' })
+                return accounts
+            } catch (error) {
+                this.messageError(error.message)
+            }
+        }
+    }
+    async modifyWalletAddress(address) {
+        store.dispatch(setWalletAddress(address))
+        await userDoLong({ address })
     }
     setWalletToken(signature) {
         store.dispatch(setWalletToken(signature))
     }
     setWalletLoginLogout() {
-        store.dispatch(setWalletLoginLogout())
+        store.dispatch(setWalletLoginLogoutState())
     }
     setAssetsChina(china) {
         // store.dispatch(setWalletToken(china))
     }
     messageError(error) {
-        message.error({ content: error, duration: 2000 })
+        message.error({ content: error, duration: 5000 })
     }
 }

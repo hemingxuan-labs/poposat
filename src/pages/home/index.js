@@ -132,6 +132,7 @@ function Home() {
                         style={{ width: 150 }}>
                         {muneList.map((item) => (
                             <div
+                                key={item.title}
                                 className="market-finder-box position-relative cursor-pointer"
                                 onClick={() => {
                                     message.error({ content: 'Coming Soon', duration: 5000 })
