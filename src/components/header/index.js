@@ -62,7 +62,7 @@ export default function PrimarySearchAppBar() {
     }
     return (
         <div>
-            <header className="header-box webkit-scrollbar-none pb-0">
+            <header className="header-box webkit-scrollbar-none">
                 <div className="logo-box d-flex-center">
                     <img
                         className="me-3"
@@ -83,7 +83,7 @@ export default function PrimarySearchAppBar() {
                             <i className="iconfont icon-discord text-white fs-3 mx-3"></i>
                         </a>
                         <a href="/" target="_blank" rel="noreferrer">
-                            <i className="iconfont icon-medium text-white fs-3 mx-3"></i>
+                            <i className="iconfont icon-gitbook text-white fs-3 mx-3"></i>
                         </a>
                     </div>
                     {!walletAddress ? (

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3710521 */
-  src: url('iconfont.woff2?t=1684736367652') format('woff2');
+  src: url('iconfont.woff2?t=1684823432691') format('woff2');
 }
 
 .iconfont {
@@ -9,6 +9,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gitbook:before {
+  content: "\e612";
 }
 
 .icon-currencybtc:before {

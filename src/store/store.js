@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const counterSlice = createSlice({
     name: 'store',
     initialState: {
-        importantList: ''
+        radarShow: false
     },
     reducers: {
-        setImportantList: (state, action) => {
-            state.importantList = action.payload
+        setRadarShow: (state, action) => {
+            state.radarShow = !state.radarShow
         }
     }
 })
-export const { setImportantList } = counterSlice.actions
+export const { setRadarShow } = counterSlice.actions
 export default counterSlice.reducer

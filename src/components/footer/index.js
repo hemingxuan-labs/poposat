@@ -1,23 +1,37 @@
 import * as React from 'react'
-import styled from 'styled-components'
-export default function PrimarySearchAppBar() {
+import { store } from '@/store/index.js'
+import { setRadarShow } from '@/store/store.js'
+
+export default function Footer() {
+    const handleClick = () => {
+        store.dispatch(setRadarShow())
+    }
     return (
-        <div>
-            <footer
-                className="webkit-scrollbar-none d-flex-between-center"
+        <>
+            <div
+                className="d-flex-center"
                 style={{
                     background: '#00FF00',
-                    height: 30,
                     color: '#000',
-                    maxWidth: 2160,
-                    minWidth: 1280,
-                    padding: '20px 40px'
+                    width: '100%',
+                    minWidth: 1280
                 }}>
-                <span className="d-flex-between-center">
-                    <i className="iconfont icon-caidan fs-5 me-2"></i> start
-                </span>
-                <span>Powered By POPOSLabs</span>
-            </footer>
-        </div>
+                <footer
+                    className="d-flex-between-center"
+                    style={{
+                        height: 30,
+                        color: '#000',
+                        width: '100%',
+                        maxWidth: 2160,
+                        minWidth: 1280,
+                        padding: '20px 40px'
+                    }}>
+                    <span className="d-flex-between-center cursor-pointer" onClick={handleClick}>
+                        <i className="iconfont icon-caidan fs-5 me-2"></i> start
+                    </span>
+                    <span>Powered By POPOSLabs</span>
+                </footer>
+            </div>
+        </>
     )
 }

@@ -4,6 +4,7 @@
     margin: auto;
     padding: 20px 40px;
     height: calc(100vh - 110px);
+    background-color: #000000;
     .market-box {
         flex: 1;
         opacity: 1;
@@ -13,7 +14,7 @@
         width: 85px;
         transition: 0.3s;
         &:hover {
-            box-shadow: rgba(138, 249, 134, 0.6) 0px 7px 29px 0px;
+            box-shadow: rgba(255, 255, 255, 0.6) 0px 7px 29px 0px;
         }
         .market-text-box {
             width: 68px;
