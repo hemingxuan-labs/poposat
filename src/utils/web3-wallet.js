@@ -43,7 +43,7 @@ export default class web3Wallet {
         // 返回钱包地址 建立连接
         try {
             const accounts = walletId === 0 ? await this.getOKXWallet() : await this.getSatWallet()
-            this.modifyWalletAddress(accounts[0])
+            this.modifyWalletAddress(accounts[0], walletId)
             return accounts[0]
         } catch (error) {
             return false
@@ -207,9 +207,9 @@ export default class web3Wallet {
             }
         }
     }
-    async modifyWalletAddress(address) {
+    async modifyWalletAddress(address, walletId) {
         store.dispatch(setWalletAddress(address))
-        await userDoLong({ address })
+        await userDoLong({ address, nikeName: walletId === 0 ? 'okx' : 'unisat' })
     }
     setWalletToken(signature) {
         store.dispatch(setWalletToken(signature))

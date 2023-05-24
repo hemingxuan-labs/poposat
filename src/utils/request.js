@@ -8,8 +8,7 @@ let service = axios.create({
 service.interceptors.request.use(
     (config) => {
         // config.headers['AuthAuthorize'] = store.state.persistence.userToken || ''
-        config.url =
-            process.env.NODE_ENV === 'development' ? '' : 'http://35.79.219.105:10888' + config.url
+        config.url = process.env.NODE_ENV === 'development' ? '' : 'https://poposat.io' + config.url
         return config
     },
     (error) => {

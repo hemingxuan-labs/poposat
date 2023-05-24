@@ -56,17 +56,23 @@ function Home() {
     }
 
     const radarShow = useSelector((state) => state.store.radarShow)
+    const radarShowDelay = useSelector((state) => state.store.radarShowDelay)
     return (
         <div>
-            <img
-                src={homebg}
-                className="position-absolute top-50 start-50 translate-middle z-0"
-                alt=""
-            />
-            {radarShow ? (
-                <Radar></Radar>
+            {radarShowDelay ? (
+                <div className={radarShow ? 'opacity-100' : 'opacity-0'}>
+                    <Radar></Radar>
+                </div>
             ) : (
-                <div className="home-box d-flex flex-column gap-4 position-relative">
+                <div
+                    className={`home-box d-flex flex-column gap-4 position-relative z-1 transition-3 ${
+                        radarShow ? 'opacity-0' : 'opacity-100'
+                    }`}>
+                    <img
+                        src={homebg}
+                        className="position-absolute top-50 start-50 translate-middle z-0"
+                        alt=""
+                    />
                     <div className="d-flex gap-4" style={{ height: '40%' }}>
                         <code className="d-block" style={{ color: '#05FB00', width: 350 }}>
                             <Typewriter></Typewriter>

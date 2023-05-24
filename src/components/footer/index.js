@@ -1,10 +1,13 @@
 import * as React from 'react'
 import { store } from '@/store/index.js'
-import { setRadarShow } from '@/store/store.js'
+import { setRadarShow, setRadarShowDelay } from '@/store/store.js'
 
 export default function Footer() {
     const handleClick = () => {
         store.dispatch(setRadarShow())
+        setTimeout(() => {
+            store.dispatch(setRadarShowDelay())
+        }, 400)
     }
     return (
         <>
