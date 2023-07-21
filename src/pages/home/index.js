@@ -13,6 +13,7 @@ import Radar from '@/components/radar'
 import message from '@/components/message'
 import { MyButton } from '@/components/mui-components/index.js'
 import { InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import '@/pages/home/index.scss'
 
 export const MyFormControl = styled(FormControl)`
@@ -32,7 +33,12 @@ export const MyFormControl = styled(FormControl)`
     }
 `
 function Home() {
+    const navigate = useNavigate()
     const muneList = [
+        {
+            title: 'Launch',
+            path: '/launch'
+        },
         {
             title: 'Market',
             path: '/'
@@ -142,6 +148,10 @@ function Home() {
                                     key={item.title}
                                     className="market-finder-box position-relative cursor-pointer"
                                     onClick={() => {
+                                        if (item.title === 'Launch') {
+                                            navigate(item.path)
+                                            return
+                                        }
                                         message.error({ content: 'Coming Soon', duration: 5000 })
                                     }}>
                                     <img

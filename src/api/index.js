@@ -9,3 +9,11 @@ export const userDoLong = (data) => {
         data
     })
 }
+// 白名单-获取列表
+export const poposatUserGetWhiteList = (data) => {
+    return service({
+        url: `/poposat/user/getWhiteList`,
+        method: 'post',
+        data
+    })
+}

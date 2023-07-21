@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '@/pages/home'
 import Market from '@/pages/market'
+import Launch from '@/pages/launch'
 import App from '@/App'
 import { persistor, store } from '@/store/index.js'
 import { Provider } from 'react-redux'
@@ -21,6 +22,7 @@ root.render(
                         <Route index element={<Home />} />
                         <Route path="home" element={<Home />} />
                         <Route path="market" element={<Market />} />
+                        <Route path="launch" element={<Launch />} />
                         <Route path="*" element={<p>There's nothing here!</p>} />
                     </Route>
                 </Routes>

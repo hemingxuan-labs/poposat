@@ -5,6 +5,7 @@ export const MyButton = styled(Button)`
     color: #000 !important;
     text-transform: none !important;
     font-size: 16px !important;
+    height: 36px;
     &:hover {
         background-color: #aef77e !important;
     }

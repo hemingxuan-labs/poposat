@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import home1 from '@/assets/image/home1.png'
 import circle from '@/assets/image/circle.png'
 import Typewriter from '@/components/typewriter'
@@ -6,7 +7,12 @@ import message from '@/components/message'
 import './index.scss'
 
 function Home() {
+    const navigate = useNavigate()
     const muneList = [
+        {
+            title: 'Launch',
+            path: '/launch'
+        },
         {
             title: 'Market',
             path: '/'
@@ -55,6 +61,10 @@ function Home() {
                                 key={item.title}
                                 className="market-finder-box position-relative cursor-pointer"
                                 onClick={() => {
+                                    if (item.title === 'Launch') {
+                                        navigate(item.path)
+                                        return
+                                    }
                                     message.error({ content: 'Coming Soon', duration: 5000 })
                                 }}>
                                 <img className="d-block" src={home1} style={{ width: 85 }} alt="" />

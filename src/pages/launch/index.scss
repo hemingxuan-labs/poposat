@@ -1,0 +1,22 @@
+.launch-box {
+    margin: auto;
+    padding: 20px 40px;
+    background-color: #000000;
+    .launch-titile {
+        font-family: Perfect !important;
+        span {
+            font-family: Perfect !important;
+        }
+    }
+    .input-text {
+        height: 36px;
+        background: #1d1d1d;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        color: #999;
+        font-size: 12px;
+        padding-left: 12px;
+        margin-left: 12px;
+    }
+}
